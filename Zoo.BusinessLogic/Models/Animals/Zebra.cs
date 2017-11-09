@@ -6,6 +6,7 @@ namespace Zoo.BusinessLogic.Models.Animals
   {
     public Zebra(DateTime dateOfBirth) : base(dateOfBirth)
     {
+
     }
   }
 }

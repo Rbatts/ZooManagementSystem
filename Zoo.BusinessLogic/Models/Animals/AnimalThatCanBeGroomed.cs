@@ -8,6 +8,7 @@ namespace Zoo.BusinessLogic.Models.Animals
 
     public AnimalThatCanBeGroomed(DateTime dateOfBirth) : base(dateOfBirth)
     {
+
     }
 
     public void Groom()
