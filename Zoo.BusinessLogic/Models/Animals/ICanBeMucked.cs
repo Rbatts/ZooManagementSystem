@@ -1,9 +1,8 @@
 ﻿namespace Zoo.BusinessLogic.Models.Animals
 {
-    public interface IAnimal
+    public interface ICanBeMucked
     {
-        void Food();
-        bool IsHungry();
+        void Muck();
         bool NeedsMucking();
     }
 }

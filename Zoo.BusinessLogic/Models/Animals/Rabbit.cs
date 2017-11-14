@@ -10,10 +10,10 @@ namespace Zoo.BusinessLogic.Models.Animals
     {
     }
 
-    public override void Feed()
+    public void Feed()
     {
       Console.WriteLine("<Munch, munch>");
-      base.Feed();
+      base.Food();
     }
 
     public void Groom()
@@ -23,7 +23,7 @@ namespace Zoo.BusinessLogic.Models.Animals
 
     public override string ToString()
     {
-      return base.ToString() + $"; Last Groomed {lastGroomed}";
+      return base.ToString() + $"  Last Groomed {lastGroomed}";
     }
   }
 }

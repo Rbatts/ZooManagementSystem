@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +8,7 @@ namespace Zoo.BusinessLogic.Services
 {
     interface IScheduler
     {
-        IEnumerable AnimalThatCanBeGroomed { get; }
-        string SubjectArea { get; set; }
+        bool AssignJobs();
 
-        void AddClassTitle(string title);
-        void RemoveClassTitle(string title);
     }
 }
-/* 

@@ -1,15 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zoo.BusinessLogic.Models.Animals
 {
-  public class Lion : Animal, ILargeAnimal
+  public class Lion : Animal, ILargeAnimal, ICanBeMucked
   {
-    public Lion(DateTime dateOfBirth) : base(dateOfBirth)
-    {
-    }
+        private DateTime lastMucked;
+
+        public Lion(DateTime dateOfBirth) : base(dateOfBirth)
+        {
+        }
+      public void Muck()
+      {
+          lastMucked = DateTime.Now;
+      }
+      public override string ToString()
+      {
+          return base.ToString() + $"   Last Mucked {lastMucked}";
+      }
+      void ICanBeMucked.Muck()
+      {
+          lastMucked = DateTime.Now;
+      }
+
+      bool ICanBeMucked.NeedsMucking()
+      {
+          throw new NotImplementedException();
+      }
   }
 }

@@ -4,47 +4,53 @@ using Zoo.BusinessLogic.Models.Animals;
 
 namespace Zoo.BusinessLogic.Models
 {
-  public interface IKeeper
-  {
-    IEnumerable<T> GetResponsibleAnimals<T>();
-
-    void FeedAnimal(Animal animalToFeed);
-
-    void GroomAnimal(ICanBeGroomed animalToGroom);
-  }
-
-  public interface IKeeper<in TAnimal> : IKeeper where TAnimal : IAnimal
-  {
-    void StartLookingAfter(TAnimal newAnimal);
-  }
-
-  public class Keeper<TAnimal> : IKeeper<TAnimal> where TAnimal : IAnimal
-  { 
-    private List<TAnimal> animals;
-
-    public Keeper(IEnumerable<TAnimal> animals)
+    public interface IKeeper
     {
-      this.animals = new List<TAnimal>(animals);
+        IEnumerable<T> GetResponsibleAnimals<T>();
+
+        void FeedAnimal(Animal animalToFeed);
+
+        void GroomAnimal(ICanBeGroomed animalToGroom);
+
+        void MuckAnimal(ICanBeMucked animalToMucked);
     }
 
-    public IEnumerable<T> GetResponsibleAnimals<T>()
+    public interface IKeeper<in TAnimal> : IKeeper where TAnimal : IAnimal
     {
-      return animals.OfType<T>();
+        void StartLookingAfter(TAnimal newAnimal);
     }
 
-    public void FeedAnimal(Animal animalToFeed)
+    public class Keeper<TAnimal> : IKeeper<TAnimal> where TAnimal : IAnimal
     {
-      animalToFeed.Feed();
-    }
+        public List<TAnimal> Animals;
 
-    public void GroomAnimal(ICanBeGroomed animalToGroom)
-    {
-      animalToGroom.Groom();
-    }
+        public Keeper(IEnumerable<TAnimal> animals)
+        {
+            this.Animals = new List<TAnimal>(animals);
+        }
 
-    public void StartLookingAfter(TAnimal newAnimal)
-    {
-      animals.Add(newAnimal);
+        public IEnumerable<T> GetResponsibleAnimals<T>()
+        {
+            return Animals.OfType<T>();
+        }
+
+        public void FeedAnimal(Animal animalToFeed)
+        {
+            animalToFeed.Food();
+        }
+        public void MuckAnimal(ICanBeMucked animalToMucked)
+        {
+            animalToMucked.Muck();
+        }
+
+        public void GroomAnimal(ICanBeGroomed animalToGroom)
+        {
+            animalToGroom.Groom();
+        }
+
+        public void StartLookingAfter(TAnimal newAnimal)
+        {
+            Animals.Add(newAnimal);
+        }
     }
-  }
 }
