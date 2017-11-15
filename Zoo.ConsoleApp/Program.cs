@@ -22,7 +22,7 @@ namespace Zoo.ConsoleApp
             };
             var smallAnimals = new ISmallAnimal[] {
                 new Rabbit(new DateTime(2014, 1, 1)),
-                new GuineaFowl(new DateTime(2017, 11, 09)),
+                new Guinea(new DateTime(2017, 11, 09)),
             };
             var animals = largeAnimals.Union<IAnimal>(smallAnimals).ToList();
 
@@ -36,6 +36,8 @@ namespace Zoo.ConsoleApp
             };
 
             var babyRabbit = new Rabbit(DateTime.Today);
+            animals.Add(babyRabbit);
+
             smallAnimalKeeper.StartLookingAfter(babyRabbit);
 
             var feedingScheduler = FeedingScheduler.Instance;
@@ -46,10 +48,15 @@ namespace Zoo.ConsoleApp
             var timer = new ZooTimer();
             new Thread(timer.Run).Start();
 
-            timer.Tick += () => feedingScheduler.AssignFeedingJobs(keepers, animals);
-            timer.Tick += () => groomingScheduler.AssignGroomingJobs(keepers, animals);
-            timer.Tick += () => muckingScheduler.AssignMuckingJobs(keepers, animals);
-            timer.Tick += () => animals.ForEach(Console.WriteLine);
+            timer.Tick += () => feedingScheduler.AssignJobs(keepers);
+            timer.Tick += () => groomingScheduler.AssignJobs(keepers);
+            timer.Tick += () => muckingScheduler.AssignJobs(keepers);
+
+            timer.Tick += () =>
+            {
+                animals.ForEach(Console.WriteLine);
+                Console.WriteLine("\n");
+            };
         }
     }
 }

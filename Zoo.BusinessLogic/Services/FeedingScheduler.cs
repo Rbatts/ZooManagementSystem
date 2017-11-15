@@ -28,9 +28,9 @@ namespace Zoo.BusinessLogic.Services
         {
         }
 
-        public void AssignFeedingJobs(IEnumerable<IKeeper> keepers, IEnumerable<IAnimal> animals)
+        public void AssignJobs(IEnumerable<IKeeper> keepers)
         {
-            Parallel.ForEach(keepers, keeper =>
+            foreach (var keeper in keepers)
             {
                 foreach (var animal in keeper.GetResponsibleAnimals<Animal>())
                 {
@@ -39,7 +39,7 @@ namespace Zoo.BusinessLogic.Services
                         keeper.FeedAnimal(animal);
                     }
                 }
-            });
+            }
         }
     }
 }

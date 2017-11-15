@@ -4,6 +4,5 @@
     {
         void Food();
         bool IsHungry();
-        bool NeedsMucking();
     }
 }

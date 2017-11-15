@@ -11,7 +11,7 @@ namespace Zoo.ConsoleApp
     {
       while (true)
       {
-        Tick?.Invoke(); // The "?." is equivalent to "if (Tick != null) Tick.Invoke();"
+        Tick?.Invoke();
 
         Thread.Sleep(1000);
       }

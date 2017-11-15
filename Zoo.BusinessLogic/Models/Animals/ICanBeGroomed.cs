@@ -3,5 +3,6 @@
   public interface ICanBeGroomed
   {
       void Groom();
+      bool NeedsGrooming();
   }
 }

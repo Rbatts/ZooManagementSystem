@@ -27,11 +27,17 @@ namespace Zoo.BusinessLogic.Services
     {
     }
 
-    public void AssignGroomingJobs(IEnumerable<IKeeper> keepers, IEnumerable<IAnimal> animals)
+    public void AssignJobs(IEnumerable<IKeeper> keepers)
     {
       foreach (var keeper in keepers)
       {
-        keeper.GetResponsibleAnimals<ICanBeGroomed>().AsParallel().ForAll(keeper.GroomAnimal);
+          foreach (var animal in keeper.GetResponsibleAnimals<ICanBeGroomed>())
+          {
+              if (animal.NeedsGrooming())
+              {
+                  keeper.GroomAnimal(animal);
+              }
+          }
       }
     }
   }
